@@ -2,6 +2,12 @@
 Alex Chheng
 */
 
+//#include <pthread.h>
+#include <stdio.h>
+//#include <unistd.h>
+#include <stdlib.h>
+#include <stdint.h>
+
 int SharedVariable = 0;
 
 void SimpleThread(int which){
