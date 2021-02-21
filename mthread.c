@@ -9,7 +9,7 @@ Steven Barberi
 #include <stdint.h>
 
 int sharedVariable = 0;
-pthread_mutex_t lock;
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_barrier_t barrier;
 
 void SimpleThread(int which){
