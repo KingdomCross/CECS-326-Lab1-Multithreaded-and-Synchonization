@@ -1,1 +1,10 @@
 READ ME
+To run the file, run in a linux Ubuntu operating machine which allows the use of pthread.
+Use the terminal command where the code file is located at.
+Type in a terminal following 2 command line
+
+    gcc mthread.c -o "filename" -lpthread -DPTHREAD_SYNC
+    ./"filename" n [n = number]
+
+The first command line will create a "filename" (an assign name you pick for the file) with pthread and mutex lock because of -DPTHREAD_SYNC in the code
+The second command line will run the "filename" with the n parameter that you assign (I recommend n = 4 for the simulated and possibly realistic situation)
