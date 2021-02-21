@@ -16,13 +16,21 @@ void SimpleThread(int which){
     int num, val;
     
     for(num = 0; num < 20; num++){
-        if (random() > RAND_MAX/2)
+        if (random() > RAND_MAX/2){
         usleep(500);
-
-    val = SharedVariable;
-    printf("*** thread %d sees value %d\n", which, val);
-    SharedVariable = val + 1;
+        }
+    #ifdef PTHREAD_SYNC
+    	pthread_mutex_lock(&lock);
+    #endif
+    	printf("*** thread %d sees value %d\n", which, val);
+    	SharedVariable = val + 1;
+    #ifdef PTHREAD_SYNC
+    	pthread_mutex_unlock(&lock);
+    #endif
     }
+    #ifdef PTHREAD_SYNC
+    	pthread_barrier_wait(&barrier);
+    #endif
     val = SharedVariable;
     printf("*** thread %d sees final value %d\n", which, val);
 }
