@@ -20,6 +20,7 @@ void SimpleThread(int which){
 		}
 	
 	#ifdef PTHREAD_SYNC
+		//locks other threads from entering at the same time as the first one is being implemented
 		pthread_mutex_lock(&lock);
 	#endif
 		val = sharedVariable;
@@ -31,6 +32,8 @@ void SimpleThread(int which){
 	#endif
 	}
 	#ifdef PTHREAD_SYNC
+		//syncs other threads together
+		//waits till all threads are here and releases them
 		pthread_barrier_wait(&barrier);
 	#endif
 	val = sharedVariable;
@@ -46,45 +49,33 @@ int main(int argc, char *argv[]){
 	int i;
 	int thread_count;
 	
-	if(argc != 2){
+	if(argc != 2){//checks to see if only one parameter was taken
 		printf("Please enter only one parameter for the command line");
 		return(0);
 	}
 	else{
-		thread_count = atoi(argv[1]);
-		if(thread_count < 1){
+		thread_count = atoi(argv[1]);//converts string to int
+		if(thread_count < 1){//checks to see if a positive number was inputted
 			printf("Enter a positive whole number...");
 			return 0;
 		}
 		
-		if(pthread_barrier_init(&barrier, NULL, thread_count)){
+		if(pthread_barrier_init(&barrier, NULL, thread_count)){//initialized to check if any thread is blocked
 			printf("Barrier not created...");
 			return -1;
 		}
 
-		pthread_t array[thread_count];
+		pthread_t array[thread_count];//creating a unique data type for threads
 
 		for(i = 0; i < thread_count; i++){
-			pthread_create(&array[i], NULL, ThreadID,(void *)(long) i);
+			pthread_create(&array[i], NULL, ThreadID,(void *)(long) i);//creates the threads
 		}
 		for ( i = 0; i < thread_count; i++){
-			pthread_join(array[i], NULL);
+			pthread_join(array[i], NULL);//waits for current thread to finish before calling the next one
 		}
 		
 		
 	}
 	
 	return 0;
-}
-
-    /*
-    pthread_t t_id;
-    printf("Before using threading \n");
-    pthread_create(&t_id, NULL, func, NULL);
-    pthread_join(t_id, NULL);
-
-    printf("After thread \n");
-
-    exit(0);
-    */
 }
