@@ -59,12 +59,12 @@ int main(int argc, char *argv[]){
             printf("Enter whole number 1 or higher");
             return 0;
         }
-        /*
+       
         if(pthread_barrier_init(&barrier, NULL, thread_count)){
             printf("Error: Barrier not created");
             return -1;
         }
-        */
+        
         pthread_t array[thread_count];
 
         for(i = 0; i < thread_count; i++){
