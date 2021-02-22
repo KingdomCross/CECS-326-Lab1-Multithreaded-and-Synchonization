@@ -1,7 +1,13 @@
 READ ME
 To run the file, run in a linux Ubuntu operating machine which allows the use of pthread.
 Use the terminal command where the code file is located at.
-Type in a terminal following 2 command line
+
+Type in a terminal following 2 command line to not sync
+
+    gcc mthread.c -o "filename" -lpthread
+    ./"filename" n [n = number]
+
+Type in a terminal following 2 command line to sync
 
     gcc mthread.c -o "filename" -lpthread -DPTHREAD_SYNC
     ./"filename" n [n = number]
