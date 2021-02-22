@@ -2,6 +2,7 @@
 CECS 326 Lab 1 Multithreaded and Synchonization
 Alex Chheng
 Steven Barberi
+02/21/21
 */
 
 #include <stdio.h>
